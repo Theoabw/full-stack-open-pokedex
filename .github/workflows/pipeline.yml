@@ -29,12 +29,12 @@ jobs:
         run: npx playwright install --with-deps
       - run: npm run eslint
       - run: npm run build
-      - name: webhook notify
-        uses: fateyan/action-discord-notifier@v1.2.0
+      - name: Discord Webhook Action
+        uses: tsickert/discord-webhook@v5.3.0
         if: failure()
         with:
-          message-title: "Commit: ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }} failed build"
-          webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          content: "Commit: ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }} failed build"
       - run: npm run test
       - run: npx playwright test
       - uses: actions/upload-artifact@v4
@@ -47,12 +47,12 @@ jobs:
         run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-      - name: webhook notify
-        uses: fateyan/action-discord-notifier@v1.2.0
+      - name: Discord Webhook Action
+        uses: tsickert/discord-webhook@v5.3.0
         if: success()
         with:
-          message-title: "Deployment successful"
-          webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          content: "Commit: ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }} deployed successfully"
 
 
 
