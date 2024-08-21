@@ -14,7 +14,7 @@ jobs:
         with:
           node-version: '16'
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: npm install --production
+      - run: npm install
       - run: npm run build
       - run: flyctl deploy --remote-only
         env:
