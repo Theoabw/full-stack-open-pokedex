@@ -77,7 +77,7 @@ module.exports = defineConfig({
   /* Run your local dev server before starting the tests */
   webServer: {
     command: 'npm run start-prod',
-    url: 'http://127.0.0.1:5000',
+    url: 'http://127.0.0.1:3000',
     // eslint-disable-next-line no-undef
     reuseExistingServer: !process.env.CI,
   },
